@@ -1,4 +1,8 @@
-﻿using System;
+﻿// Alyssa Strand (Mahler)
+// CIS 237 Advanced C# Assignment 2 Due: 10-4-16
+// This assignment uses recursion to traverse an input maze.
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -77,8 +81,19 @@ namespace cis237assignment2
         /// <returns>transposedMaze</returns>
         static char[,] transposeMaze(char[,] mazeToTranspose)
         {
-            //Write code her to create a transposed maze.
-            return new char[1, 1];
+            //Write code here to create a transposed maze.
+                // Declare an array for the transposed maze:
+            char[,] mazeTransposed = new char[12,12];
+
+            for (int xCoord = 0; xCoord < mazeToTranspose.GetLength(0); xCoord++)
+            {
+                for (int yCoord = 0; yCoord < mazeToTranspose.GetLength(1); yCoord++)
+                {
+                    mazeTransposed[xCoord, yCoord] = mazeToTranspose[yCoord, xCoord];
+                }
+            }
+                // Return the transposed maze:
+            return mazeTransposed;
         }
     }
 }
