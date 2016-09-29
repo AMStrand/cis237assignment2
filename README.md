@@ -59,6 +59,11 @@ Notes from CIS237inclass2.
 To get width and height of an array: http://stackoverflow.com/questions/4260207/how-do-you-get-the-width-and-height-of-a-multi-dimensional-array
 Print an array: http://stackoverflow.com/questions/24094093/how-to-print-2d-array-to-console-in-c-sharp
 
+Recursion logic help: https://www.topcoder.com/community/data-science/data-science-tutorials/an-introduction-to-recursion-part-2/
+Note: I had been nesting my if statements relating to the movement tries, which was stopping the recursion to 
+change X's back to O's and backtrack, so my program would dead end and just stop.  The above site helped me realize they 
+had to be listed instead of nested, and after seeing that, my program worked.
+
 ## Known Problems, Issues, And/Or Errors in the Program
 
 None.

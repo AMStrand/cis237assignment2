@@ -1,6 +1,9 @@
 ﻿// Alyssa Strand (Mahler)
 // CIS 237 Advanced C# Assignment 2 Due: 10-4-16
+
 // This assignment uses recursion to traverse an input maze.
+// This class handles the recursion work of solving the input maze,
+// as well as printing each step to the user and noting when the maze is solved.
 
 using System;
 using System.Collections.Generic;
@@ -48,7 +51,16 @@ namespace cis237assignment2
             //Do work needed to use mazeTraversal recursive call and solve the maze.
 
                 // Send in the starting coordinates:
-            mazeTraversal(xStart, yStart);
+            if (mazeTraversal(xStart, yStart))
+            {
+                // If true - maze has been completed!  Print a message to the user:
+                Console.WriteLine("Maze complete!");
+                Console.WriteLine();
+            }
+            else
+            {   // Error message if maze cannot be escaped:
+                Console.WriteLine("It appears that was not a solvable maze.");
+            }
         }
 
         /// <summary>
@@ -56,46 +68,79 @@ namespace cis237assignment2
         /// Feel free to change the return type if you like, or pass in parameters that you might need.
         /// This is only a very small starting point.
         /// </summary>
-        private void mazeTraversal(int xCoord, int yCoord)
+        /// 
+        // Recursive method returns a bool depending on whether the maze is solvable.
+        // Recursively, the boolean value controls whether the current path is successful.
+        private bool mazeTraversal(int xCoord, int yCoord)
         {
-            while (xCoord < maze.GetLength(0) && yCoord < maze.GetLength(1))
+            // If the current point is within the bounds of the maze, continue to testing:
+            if (xCoord >= 0 && xCoord < maze.GetLength(0) && yCoord >= 0 && yCoord < maze.GetLength(1))
             {
-                    //Implement maze traversal recursive call
+                // If the current spot is a valid path, continue:
                 if (maze[xCoord, yCoord] == '.')
                 {
-                        // "Move to the new spot" (make it an X): 
+                    // "Move to the new spot" (make it an X): 
                     maze[xCoord, yCoord] = 'X';
-                        // Print the current maze:
+                    // Print the current maze:
                     printMaze();
 
-                        // Try going down:
-                    mazeTraversal(xCoord + 1, yCoord);
-                        // Try going right:
-                    mazeTraversal(xCoord, yCoord + 1);
-                        // Try going up:
-                    mazeTraversal(xCoord - 1, yCoord);
-                        // Try going left:
-                    mazeTraversal(xCoord, yCoord - 1);
+                    // Try going down:
+                    if (mazeTraversal(xCoord + 1, yCoord))
+                    {
+                        return true;
+                    }
+                    // Try going right:
+                    if (mazeTraversal(xCoord, yCoord + 1))
+                    {
+                        return true;
+                    }
+                    // Try going up:
+                    if (mazeTraversal(xCoord - 1, yCoord))
+                    {
+                        return true;
+                    }
+                    // Try going left:
+                    if (mazeTraversal(xCoord, yCoord - 1))
+                    {
+                        return true;
+                    }
+
+                    // If no direction is open, change the X to an O:
+                    maze[xCoord, yCoord] = 'O';
+                    // Print the maze with the O to show the step:
+                    printMaze();
+                    // Return false to show dead end:
+                    return false;
                 }
                 else
                 {
-                   
+                    // If the spot is not a ".", it is not a valid path, so return false:
+                    return false;
                 }
             }
-            // Maze has been completed!  Print a message to the user:
-            Console.WriteLine("Maze complete!");
+            else
+            {
+                // If the current spot is outside the bounds, the maze has been solved, so return true:
+                return true;
+            }
         }
 
+        // Method to print what the maze currently looks like:
         private void printMaze()
-        {
+        {   
+            // For each x,
             for (int x = 0; x < maze.GetLength(0); x++)
-            {
+            {   
+                // For each y, 
                 for (int y = 0;  y < maze.GetLength(1); y++)
-                {
+                {   
+                    // Print the character:
                     Console.Write(maze[x, y]);
                 }
+                // At the end of the line, go to the next line:
                 Console.WriteLine();
             }
+            // Leave some space at the end of each maze output:
             Console.WriteLine();
             Console.WriteLine();
         }

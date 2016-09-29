@@ -1,6 +1,9 @@
 ﻿// Alyssa Strand (Mahler)
 // CIS 237 Advanced C# Assignment 2 Due: 10-4-16
+
 // This assignment uses recursion to traverse an input maze.
+// The main method takes in the starting maze, transposes it,
+// then calls the MazeSolver class for each maze to solve it.
 
 using System;
 using System.Collections.Generic;
@@ -85,14 +88,17 @@ namespace cis237assignment2
                 // Declare an array for the transposed maze:
             char[,] mazeTransposed = new char[12,12];
 
+            // For each x from 0 to the length of the maze,
             for (int xCoord = 0; xCoord < mazeToTranspose.GetLength(0); xCoord++)
             {
+                // And for each y from 0 to the length,
                 for (int yCoord = 0; yCoord < mazeToTranspose.GetLength(1); yCoord++)
                 {
+                    // Transpose the point:
                     mazeTransposed[xCoord, yCoord] = mazeToTranspose[yCoord, xCoord];
                 }
             }
-                // Return the transposed maze:
+            // Return the transposed maze:
             return mazeTransposed;
         }
     }
